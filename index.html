@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Monitor de Contenedor</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+
+<body>
+
+<h1>MONITOREO DE LLENADO Y UBICACION DE CONTENEDOR</h1>
+
+<div id="map"></div>
+
+<div class="panel">
+  <h2>NIVEL DE LLENADO</h2>
+  <div class="barra">
+    <div id="relleno"></div>
+  </div>
+  <p><span id="nivelTexto">--</span></p>
+</div>
+
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
