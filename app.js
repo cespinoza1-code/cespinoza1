@@ -23,6 +23,7 @@ const PUNTO_PARTIDA = {
   lat: 19.08567230389678,
   lng: -104.2604645473242,
 };
+
 // Esperar carga
 window.onload = () => {
 
@@ -52,7 +53,7 @@ window.onload = () => {
     PUNTO_PARTIDA.lng
   ])
   .addTo(map)
-  .bindPopup("PUNTO DE PARTIDA REAL COUNTRY");
+  .bindPopup("PUNTO DE PARTIDA VERTEDERO");
 
   // ===============================
   // VARIABLES
