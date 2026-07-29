@@ -21,7 +21,7 @@ const PROFUNDIDAD = 30;
 
 const PUNTO_PARTIDA = {
   lat: 19.08567230389678,
-  lng: -104.2604645473242
+  lng: -104.2604645473242,
 };
 // Esperar carga
 window.onload = () => {
