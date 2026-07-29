@@ -48,12 +48,6 @@ window.onload = () => {
   // PUNTO DE PARTIDA
   // ===============================
 
-  L.marker([
-    PUNTO_PARTIDA.lat,
-    PUNTO_PARTIDA.lng
-  ])
-  .addTo(map)
-  .bindPopup("PUNTO DE PARTIDA VERTEDERO");
 
   // ===============================
   // VARIABLES
