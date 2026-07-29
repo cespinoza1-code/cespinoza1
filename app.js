@@ -20,10 +20,9 @@ const firebaseConfig = {
 const PROFUNDIDAD = 30;
 
 const PUNTO_PARTIDA = {
-  lat: 19.124102079967024,
-  lng: -104.40004299017038
+  lat: 19.08567230389678,
+  lng: -104.2604645473242
 };
-
 // Esperar carga
 window.onload = () => {
 
