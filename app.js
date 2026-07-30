@@ -47,13 +47,42 @@ window.onload = () => {
   // ===============================
   // PUNTO DE PARTIDA
   // ===============================
+const iconoVertedero = L.icon({
 
-  L.marker([
+    iconUrl: "img/vertedero.png",
+
+    iconSize: [50,50],
+
+    iconAnchor: [25,50],
+
+    popupAnchor: [0,-45]
+
+});
+L.marker(
+[
     PUNTO_PARTIDA.lat,
     PUNTO_PARTIDA.lng
-  ])
-  .addTo(map)
-  .bindPopup("PUNTO DE PARTIDA VERTEDERO");
+],
+{
+    icon: iconoVertedero
+})
+.addTo(map)
+.bindPopup(`
+<b>VERTEDERO MUNICIPAL</b><br>
+Punto de inicio y fin de la ruta
+`);
+L.circle(
+[
+    PUNTO_PARTIDA.lat,
+    PUNTO_PARTIDA.lng
+],
+{
+    radius:60,
+    color:"#2E7D32",
+    fillColor:"#4CAF50",
+    fillOpacity:0.35,
+    weight:3
+}).addTo(map);
 
   // ===============================
   // VARIABLES
@@ -216,7 +245,116 @@ window.onload = () => {
     }
 
     return ruta;
+  
   }
+
+// ===============================
+// PANEL ORDEN DE RECOLECCIÓN
+// ===============================
+
+function actualizarListaRuta(ruta){
+    const lista =
+    document.getElementById(
+        "listaRuta"
+    );
+
+    lista.innerHTML="";
+
+    let anterior={
+
+        lat:PUNTO_PARTIDA.lat,
+
+        lng:PUNTO_PARTIDA.lng
+
+    };
+
+    ruta.forEach((punto,index)=>{
+
+        let distancia=
+
+        calcularDistancia(
+
+            anterior.lat,
+
+            anterior.lng,
+
+            punto.lat,
+
+            punto.lng
+
+        );
+
+        let nivel;
+
+        if(punto.nombre==="CONTENEDOR MOVIL"){
+
+            nivel=gpsActual.nivel;
+
+        }
+
+        else{
+
+            nivel=calcularNivel(
+
+                parseFloat(
+
+                    puntosFijos[punto.nombre].distancia
+
+                )
+
+            );
+
+        }
+
+        lista.innerHTML+=`
+
+<div class="tarjetaRuta">
+
+<div class="numeroRuta">
+
+${index+1}
+
+</div>
+
+<div class="infoRuta">
+
+<div class="nombreRuta">
+
+${punto.nombre}
+
+</div>
+
+<div class="detalleRuta">
+
+Nivel:
+<b>${nivel.toFixed(1)}%</b>
+
+<br>
+
+Distancia desde el punto anterior:
+
+<b>${distancia.toFixed(2)} km</b>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+        anterior=punto;
+
+    });
+
+}
+
+
+
+
+
+
+
 
   // ===============================
   // PUNTOS FIJOS
@@ -511,7 +649,8 @@ marcadoresFijos[nombre].bindTooltip(
         obtenerRutaOptima(
           candidatos
         );
-
+// ACTUALIZAR EL PANEL DE ORDEN
+actualizarListaRuta(ruta);
       let waypoints =
       [];
 
@@ -582,6 +721,11 @@ marcadoresFijos[nombre].bindTooltip(
 
         rutaControl =
           null;
+          document.getElementById("listaRuta").innerHTML = `
+<div class="sinRuta">
+Aún no se ha generado una ruta.
+</div>
+`;
       }
     }
   );
