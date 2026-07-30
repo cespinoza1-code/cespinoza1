@@ -49,7 +49,7 @@ window.onload = () => {
   // ===============================
 const iconoVertedero = L.icon({
 
-    iconUrl: "img/vertedero.png",
+    iconUrl: "vertedero.png",
 
     iconSize: [50,50],
 
